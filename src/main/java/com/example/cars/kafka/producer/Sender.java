@@ -1,6 +1,7 @@
 package com.example.cars.kafka.producer;
 
 import com.example.cars.model.Car;
+import com.example.cars.model.Receipt;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,10 +23,10 @@ public class Sender {
 
 
     @Autowired
-    private KafkaTemplate<String, Car> kafkaTemplate;
+    private KafkaTemplate<String, Receipt> kafkaTemplate;
 
-    public void send(Car car) {
-        LOGGER.info("sending car='{}'", car.toString());
-        kafkaTemplate.send(TOPIC, car);
+    public void send(Receipt receipt) {
+        LOGGER.info("sending receipt='{}'", receipt.toString());
+        kafkaTemplate.send(TOPIC, receipt);
     }
 }

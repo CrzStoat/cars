@@ -3,7 +3,7 @@ package com.example.cars.kafka.producer;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.example.cars.model.Car;
+import com.example.cars.model.Receipt;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,12 +30,12 @@ public class SenderConfig {
     }
 
     @Bean
-    public ProducerFactory<String, Car> producerFactory() {
+    public ProducerFactory<String, Receipt> producerFactory() {
         return new DefaultKafkaProducerFactory<>(producerConfigs());
     }
 
     @Bean
-    public KafkaTemplate<String, Car> kafkaTemplate() {
+    public KafkaTemplate<String, Receipt> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
 

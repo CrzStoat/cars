@@ -3,7 +3,7 @@ package com.example.cars.kafka.consumer;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.example.cars.model.Car;
+import com.example.cars.model.Receipt;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -36,14 +36,14 @@ public class ReceiverConfig {
     }
 
     @Bean
-    public ConsumerFactory<String, Car> consumerFactory() {
+    public ConsumerFactory<String, Receipt> consumerFactory() {
         return new DefaultKafkaConsumerFactory<>(consumerConfigs(), new StringDeserializer(),
-                new JsonDeserializer<>(Car.class));
+                new JsonDeserializer<>(Receipt.class));
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, Car> kafkaListenerContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory<String, Car> factory =
+    public ConcurrentKafkaListenerContainerFactory<String, Receipt> kafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, Receipt> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
 

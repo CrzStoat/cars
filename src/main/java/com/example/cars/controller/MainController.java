@@ -3,6 +3,7 @@ package com.example.cars.controller;
 
 import com.example.cars.kafka.producer.Sender;
 import com.example.cars.model.Car;
+import com.example.cars.model.Receipt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,7 +21,7 @@ public class MainController {
     }
 
     @PostMapping("/publish")
-    public void messageToTopic(@RequestBody Car car){
-        this.sender.send(car);
+    public void messageToTopic(@RequestBody Receipt receipt){
+        this.sender.send(receipt);
     }
 }

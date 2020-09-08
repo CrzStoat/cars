@@ -1,18 +1,17 @@
 package com.example.cars.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 
 @Entity
-@Table
-@Data
-@EqualsAndHashCode(of = {"id"})
 public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonIgnore
     private Long id;
     private String make;
     private String manufacturer;

@@ -1,9 +1,14 @@
 package com.example.cars.kafka.consumer;
 
+import java.time.LocalDate;
 import java.util.concurrent.CountDownLatch;
 
 import com.example.cars.model.Car;
+import com.example.cars.model.Receipt;
+import com.example.cars.model.Seller;
 import com.example.cars.repository.CarRepository;
+import com.example.cars.repository.ReceiptRepository;
+import com.example.cars.repository.SellerRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +21,17 @@ import org.springframework.stereotype.Service;
 public class Receiver {
     private static final Logger LOGGER = LoggerFactory.getLogger(Receiver.class);
     private final CarRepository carRepository;
+    private final SellerRepository sellerRepository;
+    private final ReceiptRepository receiptRepository;
 
     private static final String TOPIC = "test_topic";
     private CountDownLatch latch = new CountDownLatch(1);
 
     @Autowired
-    public Receiver(CarRepository carRepository) {
+    public Receiver(CarRepository carRepository, SellerRepository sellerRepository, ReceiptRepository receiptRepository) {
         this.carRepository = carRepository;
+        this.sellerRepository = sellerRepository;
+        this.receiptRepository = receiptRepository;
     }
 
     public CountDownLatch getLatch() {
@@ -30,10 +39,10 @@ public class Receiver {
     }
 
     @KafkaListener(topics = TOPIC, groupId = "group_id")
-    public void receive(Car car) {
-        LOGGER.info("received car='{}'", car.toString());
-        carRepository.save(car);
-        System.out.println(car.toString() + " successfully saved!!!");
+    public void receive(Receipt receipt) {
+        LOGGER.info("received receipt='{}'", receipt.toString());
+        receiptRepository.save(receipt);
+        System.out.println(receipt.toString() + "Receipt"+ receipt.toString()+"Successfully saved!!!");
         latch.countDown();
     }
 }
