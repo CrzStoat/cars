@@ -2,10 +2,11 @@ package com.example.cars.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class Car {
@@ -55,6 +56,10 @@ public class Car {
 
     @Override
     public String toString() {
-        return "Car [make=" + make + ", manufacturer=" + manufacturer + ", id=" + id + "]";
+        return "Car{" +
+                "id=" + id +
+                ", make='" + make + '\'' +
+                ", manufacturer='" + manufacturer + '\'' +
+                '}';
     }
 }

@@ -2,14 +2,10 @@ package com.example.cars.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 public class Receipt {
@@ -17,13 +13,16 @@ public class Receipt {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @JsonIgnore
     private Long id;
+    @NotNull(message = "Price cannot be null")
     private Long price;
     @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate dateOfSale;
 
+    @NotNull(message = "Car cannot be null")
     @ManyToOne(cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private Car car;
+
     @ManyToOne(cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private Seller seller;

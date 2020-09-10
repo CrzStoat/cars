@@ -1,11 +1,6 @@
 package com.example.cars.kafka.consumer;
 
-import java.time.LocalDate;
-import java.util.concurrent.CountDownLatch;
-
-import com.example.cars.model.Car;
 import com.example.cars.model.Receipt;
-import com.example.cars.model.Seller;
 import com.example.cars.repository.CarRepository;
 import com.example.cars.repository.ReceiptRepository;
 import com.example.cars.repository.SellerRepository;
@@ -15,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
+
+import java.util.concurrent.CountDownLatch;
 
 @EnableKafka
 @Service
@@ -42,7 +39,7 @@ public class Receiver {
     public void receive(Receipt receipt) {
         LOGGER.info("received receipt='{}'", receipt.toString());
         receiptRepository.save(receipt);
-        System.out.println(receipt.toString() + "Receipt"+ receipt.toString()+"Successfully saved!!!");
+        System.out.println("Receipt"+ receipt.toString()+"Successfully saved!!!");
         latch.countDown();
     }
 }
